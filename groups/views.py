@@ -3,6 +3,7 @@ from .models import Category, Link
 from .serializers import CategorySerializer, LinkSerializer
 from rest_framework import generics
 from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
 # Create your views here.
 
 
@@ -12,6 +13,21 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class LinkViewSet(viewsets.ModelViewSet):
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            self.perform_create(serializer)
+            headers = self.get_success_headers(serializer.data)
+            return Response({
+                'status': 'ok',
+                'msg': 'The link has been added'
+            }, status=status.HTTP_201_CREATED, headers=headers)
+        else:
+            return Response({
+                'status': 'fail',
+                'msg': 'The link has not been added!'
+            })
+
     queryset = Link.objects.all()
     serializer_class = LinkSerializer
 
