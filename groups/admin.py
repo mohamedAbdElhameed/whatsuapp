@@ -10,11 +10,16 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class LinkAdmin(admin.ModelAdmin):
-    list_display = ['name', 'link', 'image', 'category', 'details']
+    list_display = ['name', 'image_tag', 'link', 'image', 'category', 'details', 'added_by']
     search_fields = ['name', 'link', 'details']
     autocomplete_fields = ['category']
-    list_filter = ['category', 'created', 'modified']
+    list_filter = ['category', 'created', 'modified', 'added_by']
+    exclude = ('added_by',)
 
+    def save_model(self, request, obj, form, change):
+        if getattr(obj, 'added_by', None) is None:
+            obj.added_by = request.user
+        super(LinkAdmin, self).save_model(request, obj, form, change)
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Link, LinkAdmin)
