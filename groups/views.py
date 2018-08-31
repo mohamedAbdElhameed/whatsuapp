@@ -21,7 +21,7 @@ class LinkViewSet(viewsets.ModelViewSet):
             return Response({
                 'status': 'ok',
                 'msg': 'The link has been added'
-            }, status=status.HTTP_201_CREATED, headers=headers)
+            })
         else:
             return Response({
                 'status': 'fail',
