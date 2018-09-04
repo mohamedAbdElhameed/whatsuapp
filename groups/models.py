@@ -19,6 +19,7 @@ class Link(models.Model):
     link = models.URLField(max_length=500)
     details = models.TextField(null=True, blank=True)
     image = models.URLField(max_length=500, null=True, blank=True)
+    active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 

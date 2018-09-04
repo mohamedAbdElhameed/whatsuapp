@@ -17,10 +17,9 @@ class LinkViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             self.perform_create(serializer)
-            headers = self.get_success_headers(serializer.data)
             return Response({
                 'status': 'ok',
-                'msg': 'The link has been added'
+                'msg': 'The link has been added and will show after admin accepting'
             })
         else:
             return Response({
@@ -28,14 +27,14 @@ class LinkViewSet(viewsets.ModelViewSet):
                 'msg': 'The link has not been added!'
             })
 
-    queryset = Link.objects.all()
+    queryset = Link.objects.filter(active=True).order_by('-modified')
     serializer_class = LinkSerializer
 
 
 class LinkList(generics.ListAPIView):
     def get_queryset(self):
         category = get_object_or_404(Category, pk=self.kwargs['cat_pk'])
-        query_set = Link.objects.filter(category=category)
+        query_set = Link.objects.filter(category=category, active=True).order_by('-modified')
         return query_set
 
     serializer_class = LinkSerializer
