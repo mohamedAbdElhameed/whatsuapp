@@ -33,9 +33,12 @@ class Link(models.Model):
             ss = s.split('invite')
             if len(ss) == 1:
                 ss = s.split('.com/')
-                ss.insert(1, '.com/invite/icon/')
-                s = ss[0] + ss[1] + ss[2]
-            else:
+                if len(ss) == 1:
+                    self.image = s
+                else:
+                    ss.insert(1, '.com/invite/icon/')
+                    s = ss[0] + ss[1] + ss[2]
+            else :
                 ss.insert(1, 'invite/icon')
                 s = ss[0] + ss[1] + ss[2]
             self.image = s

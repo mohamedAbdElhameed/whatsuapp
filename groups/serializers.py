@@ -13,3 +13,8 @@ class LinkSerializer(serializers.ModelSerializer):
         model = Link
         fields = ('id', 'category', 'name', 'link', 'details', 'image')
 
+
+class CategorySerializerWithoutPaging(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('id', 'name')

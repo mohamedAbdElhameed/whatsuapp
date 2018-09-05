@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from .models import Category, Link
-from .serializers import CategorySerializer, LinkSerializer
+from .serializers import CategorySerializer, LinkSerializer, CategorySerializerWithoutPaging
 from rest_framework import generics
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
@@ -38,3 +38,9 @@ class LinkList(generics.ListAPIView):
         return query_set
 
     serializer_class = LinkSerializer
+
+
+class CategoryWithoutPagingViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializerWithoutPaging
+    pagination_class = None

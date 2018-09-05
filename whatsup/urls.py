@@ -20,11 +20,12 @@ from django.urls import path
 
 from whatsup import settings
 from rest_framework import routers
-from groups.views import CategoryViewSet, LinkViewSet, LinkList
+from groups.views import CategoryViewSet, LinkViewSet, LinkList, CategoryWithoutPagingViewSet
 
 router = routers.DefaultRouter()
 router.register(r'categories', CategoryViewSet)
 router.register(r'links', LinkViewSet)
+router.register(r'allcategories', CategoryWithoutPagingViewSet)
 
 
 
