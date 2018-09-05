@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
+
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=300)
@@ -50,3 +52,16 @@ class Link(models.Model):
         return mark_safe('<img src="{}" width="50" height="50" />'.format(self.image))
     image_tag.short_description = 'Image'
     image_tag.allow_tags = True
+
+class Item(models.Model):
+    small_photo = models.ImageField(upload_to='groups/', null=True, blank=True)
+    big_title = models.CharField(max_length=200)
+    small_title = models.CharField(max_length=200, null=True, blank=True)
+    description = RichTextField(null=True, blank=True)
+    about_photo = models.ImageField(upload_to='groups/', null=True, blank=True)
+    about_title = models.CharField(max_length=100, null=True, blank=True)
+    about_version = models.CharField(max_length=100, null=True, blank=True)
+    about_sub_title = models.CharField(max_length=100, null=True, blank=True)
+
+    def __str__(self):
+        return self.big_title

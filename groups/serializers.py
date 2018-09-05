@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Link
+from .models import Category, Link, Item
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -18,3 +18,8 @@ class CategorySerializerWithoutPaging(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ('id', 'name')
+
+class ItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item
+        fields = '__all__'

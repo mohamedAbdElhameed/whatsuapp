@@ -20,13 +20,13 @@ from django.urls import path
 
 from whatsup import settings
 from rest_framework import routers
-from groups.views import CategoryViewSet, LinkViewSet, LinkList, CategoryWithoutPagingViewSet
+from groups.views import CategoryViewSet, LinkViewSet, LinkList, CategoryWithoutPagingViewSet, ItemViewSet
 
 router = routers.DefaultRouter()
 router.register(r'categories', CategoryViewSet)
 router.register(r'links', LinkViewSet)
-router.register(r'allcategories', CategoryWithoutPagingViewSet)
-
+router.register(r'allcategories', CategoryWithoutPagingViewSet, 'allcategories')
+router.register(r'items', ItemViewSet)
 
 
 urlpatterns = [
