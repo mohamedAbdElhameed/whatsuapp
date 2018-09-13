@@ -18,6 +18,7 @@ class LinkAdmin(admin.ModelAdmin):
     autocomplete_fields = ['category']
     list_filter = ['category', 'created', 'modified', 'added_by', 'active']
     exclude = ['added_by',]
+    list_editable = ['active', 'category']
 
     def save_model(self, request, obj, form, change):
         if getattr(obj, 'added_by', None) is None:

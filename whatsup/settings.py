@@ -23,7 +23,7 @@ BOOTSTRAP_ADMIN_SIDEBAR_MENU = True
 SECRET_KEY = 'vvui+a4vp0=&^ab^2#dms27(cqbo(06z8ywd1^3zu@fs+#9zzw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['mohamedabdelhameed.pythonanywhere.com']
 
@@ -191,5 +191,6 @@ CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 STATIC_ROOT = "/home/MohamedAbdElhameed/whatsuapp/static"
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = '/home/MohamedAbdElhameed/whatsuapp/media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
+#MEDIA_ROOT = '/home/MohamedAbdElhameed/whatsuapp/media'
 MEDIA_URL = '/media/'

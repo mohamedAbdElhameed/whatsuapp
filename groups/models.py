@@ -10,6 +10,8 @@ class Category(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['id']
     def __str__(self):
         return self.name
 
